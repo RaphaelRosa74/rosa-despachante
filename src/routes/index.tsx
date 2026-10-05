@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect } from "react";
-import styled from "styled-components";
+import { styled } from "styled-components";
 import heroImage from "@/assets/rosa-hero.jpg";
 
 const whatsappUrl = `https://wa.me/5511965683611?text=${encodeURIComponent("Olá encontrei voces, pelo site, gostaria de solicitar o serviços de voces.")}`;
