@@ -16,6 +16,17 @@ const services = [
   ["CNH", "Renovação, segunda via e orientação para processos de habilitação."],
 ];
 
+const faqs = [
+  ["O que faz um despachante?", "Um despachante auxilia na regularização de documentos de veículos. Cuidamos de toda a burocracia para você não perder tempo em filas, com rapidez e segurança."],
+  ["Preciso ir até o Detran para resolver meus problemas com o veículo?", "Não necessariamente. Na maior parte dos casos resolvemos tudo por você, sem que precise se deslocar até o Detran."],
+  ["Quais serviços vocês realizam para veículos?", "Transferência de propriedade, primeiro emplacamento, segunda via de CRV/CRLV, licenciamento anual, regularização de débitos (IPVA e multas), baixa de veículo, entre outros."],
+  ["Quanto tempo leva para transferir um veículo?", "O prazo varia conforme a demanda do Detran, mas geralmente a transferência é concluída em até 5 dias úteis após a entrega de toda a documentação."],
+  ["Preciso reconhecer firma para transferência de veículo?", "Sim, a assinatura do vendedor no CRV precisa ser reconhecida em cartório. Orientamos você em todo o processo."],
+  ["Quais documentos são necessários para transferência?", "CRV assinado com firma reconhecida, RG e CPF do comprador e comprovante de residência. Conferimos tudo para evitar problemas."],
+  ["Posso parcelar os débitos do veículo?", "Sim, existem opções de parcelamento no cartão de crédito para IPVA, multas e licenciamento. Ajudamos a escolher a melhor forma."],
+  ["Como faço para solicitar um orçamento?", "É só chamar no WhatsApp (11) 96568-3611 ou visitar nosso escritório na Rua Manuel Gaya, 679 — Vila Nova Mazzei."],
+];
+
 const reviews = [
   { name: "Hélio Moreno", time: "um mês atrás", text: "Ótimo lugar. Excelente profissional, tira suas dúvidas claramente, super prestativo e entregou o meu serviço na data certa. Recomendo!" },
   { name: "Igor Alves Prieto", time: "2 meses atrás", text: "Despachante de confiança, eu e minha família só vamos nele." },
@@ -58,7 +69,7 @@ function Index() {
           <Monogram>R</Monogram><BrandWords><strong>ROSA</strong><span>DESPACHANTE</span></BrandWords>
         </Brand>
         <Nav aria-label="Navegação principal">
-          <a href="#sobre">Sobre</a><a href="#servicos">Serviços</a><a href="#avaliacoes">Avaliações</a><a href="#localizacao">Localização</a>
+          <a href="#sobre">Sobre</a><a href="#servicos">Serviços</a><a href="#avaliacoes">Avaliações</a><a href="#faq">FAQ</a><a href="#localizacao">Localização</a>
         </Nav>
         <HeaderCta href={whatsappUrl} target="_blank" rel="noreferrer">Fale conosco</HeaderCta>
       </Header>
@@ -103,6 +114,11 @@ function Index() {
         </ReviewGrid>
         <GoogleLink href={googlePlaceUrl} target="_blank" rel="noreferrer">Ver todas as avaliações no Google →</GoogleLink>
       </Reviews>
+
+      <Faq id="faq">
+        <div data-reveal><SectionTag>Dúvidas</SectionTag><h2>Perguntas<br/>frequentes.</h2><p>Não encontrou sua dúvida? Fale direto com a gente pelo WhatsApp.</p><TextLink href={whatsappUrl} target="_blank" rel="noreferrer">Tirar dúvida →</TextLink></div>
+        <FaqList data-reveal>{faqs.map(([q, a]) => <details key={q}><summary>{q}<i aria-hidden="true">+</i></summary><p>{a}</p></details>)}</FaqList>
+      </Faq>
 
       <Location id="localizacao">
         <MapWrap data-reveal><iframe title="Localização da Rosa Despachante" src={mapsUrl} loading="lazy" referrerPolicy="no-referrer-when-downgrade" /></MapWrap>
@@ -158,3 +174,5 @@ const ContactRow = styled.div`display:grid;grid-template-columns:1fr 1fr;gap:25p
 const Directions = styled(PrimaryLink)`width:max-content;margin-top:38px;background:var(--gold);color:var(--surface-dark)!important`;
 const Footer = styled.footer`background:var(--surface-dark);color:var(--light-text);padding:55px clamp(24px,9vw,150px);display:grid;grid-template-columns:1fr 1fr 1fr;align-items:center;gap:30px;p{color:var(--light-muted);font-size:12px;text-align:center}small{font-size:9px;color:var(--light-muted);text-align:right}@media(max-width:750px){grid-template-columns:1fr;text-align:center;justify-items:center;small{text-align:center}}`;
 const WhatsApp = styled.a`position:fixed;z-index:20;right:24px;bottom:24px;height:54px;background:oklch(0.7 0.2 145);color:oklch(1 0 0)!important;border-radius:30px;display:flex;align-items:center;gap:10px;padding:0 18px 0 14px;box-shadow:0 8px 25px color-mix(in oklab,var(--foreground) 25%,transparent);font-size:10px;text-transform:uppercase;font-weight:700;transition:.25s;svg{width:27px;height:27px;fill:currentColor}&:hover{transform:translateY(-3px)}@media(max-width:600px){width:56px;height:56px;padding:14px;span{display:none}}`;
+const Faq = styled.section`padding:110px clamp(24px,9vw,150px);display:grid;grid-template-columns:.8fr 1.2fr;gap:8vw;max-width:1500px;margin:auto;h2{font:600 clamp(40px,4vw,60px)/1.05 var(--font-display);color:var(--wine-deep);margin:0 0 22px}>div>p{color:var(--muted-foreground);font-size:14px;line-height:1.7;margin-bottom:26px}${TextLink}{color:var(--primary);border-color:var(--primary)}@media(max-width:850px){grid-template-columns:1fr;gap:40px}`;
+const FaqList = styled.div`border-top:1px solid var(--border);details{border-bottom:1px solid var(--border)}summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:20px;padding:24px 0;font:600 19px/1.35 var(--font-display);color:var(--foreground);transition:color .2s;&::-webkit-details-marker{display:none}&:hover{color:var(--primary)}}i{font-style:normal;color:var(--primary);font-size:24px;line-height:1;transition:transform .3s}details[open] i{transform:rotate(45deg)}details[open] summary{color:var(--primary)}p{margin:0;padding:0 40px 24px 0;font-size:14px;line-height:1.8;color:var(--muted-foreground)}`;
