@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { styled } from "styled-components";
 import heroImage from "@/assets/rosa-hero.jpg";
 
@@ -53,14 +53,19 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
+  const [ready, setReady] = useState(false);
+  useEffect(() => setReady(true), []);
   useEffect(() => {
+    if (!ready) return;
     const observer = new IntersectionObserver(
       (entries) => entries.forEach((entry) => entry.isIntersecting && entry.target.classList.add("visible")),
       { threshold: 0.14 },
     );
     document.querySelectorAll("[data-reveal]").forEach((element) => observer.observe(element));
     return () => observer.disconnect();
-  }, []);
+  }, [ready]);
+
+  if (!ready) return null;
 
   return (
     <Page>
